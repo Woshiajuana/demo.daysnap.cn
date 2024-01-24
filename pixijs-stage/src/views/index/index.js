@@ -38,68 +38,21 @@ app.stage.addChild(rectangle)
 // 加载图片
 // const texture = await PIXI.Assets.load('assets/img/bg0.jpeg')
 // const bunny = new PIXI.Sprite(texture)
-
-// // Setup the position of the bunny
-// bunny.x = app.renderer.width / 2
-// bunny.y = app.renderer.height / 2
-
-// // Rotate around the center
-// bunny.anchor.x = 0
-// bunny.anchor.y = 0
-
-// // Add the bunny to the scene we are building
 // app.stage.addChild(bunny)
 
-// // Listen for frame updates
+// 多个图片资源加载 分场景
+PIXI.Assets.addBundle('scree-1', {
+  bg: 'assets/img/bg0.jpeg',
+})
+// 加载
+const assets = await PIXI.Assets.loadBundle('scree-1', (progress) => {
+  console.log('progress', progress)
+})
+
+// 显示文字
+
+// 监听 ticker
 // app.ticker.add(() => {
 //   // each frame we spin the bunny around a bit
 //   // bunny.rotation += 0.01
 // })
-
-/**
- * 快速排序
- */
-
-// 快速排序
-
-// 快速排序
-
-/** 快速排序 */
-
-// 快速排序
-
-/** 快速排序 */
-
-//快速排序
-
-// 快速排序
-
-// 冒泡排序
-
-//快速排序
-
-// 快速排序
-
-//快速排序
-
-//冒泡排序
-
-// 计算两个数想加
-function add(x, y) {
-  return x + y
-}
-
-// 计算两个数相减
-function minus(x, y) {
-  return x - y
-}
-
-// 计算两个数相乘
-function multiply(x, y) {
-  return x * y
-}
-
-// 计算两个数相除
-function divide(x, y) {
-  return x / y
-}
