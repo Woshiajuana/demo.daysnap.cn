@@ -6,6 +6,9 @@ module.exports = merge(webpackCommonConfig, {
   // 模式
   mode: 'development',
 
+  // 关闭 source map
+  devtool: false,
+
   // loader
   module: {
     rules: [
