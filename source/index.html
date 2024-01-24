@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://boston.g-elephant.com/2021minisite/index.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./assets/hm.js"></script>  <meta name="viewport" content="width=750,target-densitydpi=device-dpi,user-scalable=no"> <meta name="format-detection" content="telephone=no"> <title>1111</title> <script src="./assets/soundjs.min.js"></script> <script src="./assets/preloadjs.min.js"></script> <script src="./assets/jquery-1.8.3.min.js"></script> <script src="./assets/weixin.js"></script> 
+<!-- begin REM Zoom 计算 -->
+<script type="text/javascript">
+  (function (win) {
+    var remCalc = {};
+    var docEl = win.document.documentElement,
+      tid,
+      hasRem = false,
+      hasZoom = false,
+      zoomRuler = 'width',
+      designWidth = 750,
+      designHeight = 1206;
+
+    function refresh() {
+      var width = docEl.clientWidth;
+      var height = docEl.clientHeight;
+      if (width > 768) width = 768;
+      if (hasRem) {
+        var rem = width / 10;
+        docEl.style.fontSize = rem + "px";
+        remCalc.rem = rem;
+        var actualSize = parseFloat(window.getComputedStyle(document.documentElement)["font-size"]);
+        if (actualSize !== rem && actualSize > 0 && Math.abs(actualSize - rem) > 1) {
+          var remScaled = rem * rem / actualSize;
+          docEl.style.fontSize = remScaled + "px";
+        }
+      }
+      if (hasZoom) {
+        var style = document.getElementById('J__style');
+        if (!style) {
+          style = document.createElement('style');
+          style.id = 'J__style';
+        }
+        var r,s;
+        if (zoomRuler === 'height') {
+          r = height / designHeight;
+        } else {
+          r = width / designWidth;
+        }
+        r.toFixed && (r = r.toFixed(5));
+        s = '.__z{zoom:' + r + '} ';
+        s += '.__s{-webkit-transform: scale(' + r + ');transform: scale(' + r + ')}';
+
+        style.innerHTML = s;
+        document.getElementsByTagName('head')[0].appendChild(style);
+      }
+    }
+
+    function dbcRefresh() {
+      clearTimeout(tid);
+      tid = setTimeout(refresh, 100)
+    }
+    win.addEventListener("resize", function () {
+      dbcRefresh()
+    }, false);
+
+    win.addEventListener("pageshow", function (e) {
+      if (e.persisted) {
+        dbcRefresh();
+      }
+    }, false);
+    refresh();
+    if (hasRem) {
+      remCalc.refresh = refresh;
+      remCalc.rem2px = function (d) {
+        var val = parseFloat(d) * this.rem;
+        if (typeof d === "string" && d.match(/rem$/)) {
+          val += "px";
+        }
+        return val;
+      };
+      remCalc.px2rem = function (d) {
+        var val = parseFloat(d) / this.rem;
+        if (typeof d === "string" && d.match(/px$/)) {
+          val += "rem";
+        }
+        return val;
+      };
+      win.remCalc = remCalc;
+    }
+  })(window);
+
+</script>
+<!-- end REM Zoom 计算 -->
+ <style>.hide{display:none}</style> <script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?398964f40c3f271fd300a7fc6ef38b94";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script> <link href="./assets/app.css" rel="stylesheet"></head> <body>  <audio src="media/bg.mp3" id="bgm" loop=""></audio> <div id="o2_main" class="main"> <div id="home" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><canvas width="1188" height="1450" style="touch-action: none; width: 594px; height: 725px; cursor: inherit;"></canvas></div>  <div id="gamestart" class="hide"> <div id="logo" class="animated08 fadeInToAlpha"></div> <div class="box"> <div class="f0 animated08 fadeInToY"></div> <div class="f1 delay02 animated08 fadeInToY"></div> <div class="start delay05 animated08 fadeInToY"></div> <div class="rankbtn delay08 animated08 fadeInToY"></div> <div class="backbtn delay1 animated08 fadeInToY"></div> </div> <div class="icon animated08 fadeInToAlpha"></div> </div> <div id="gametippop" class="hide"> <div class="box"> <div class="tipclose close"></div> </div> </div> <div id="gamerule" class="hide"> <div class="rule animated05 fadeInScale"> <div class="ruleclose close"></div> </div> </div> <div id="msg" class="hide"> <div class="box animated05 fadeInScale"> <div class="msgclose close"></div> <input type="text" class="nametxt inputs" onkeyup="this.value=this.value.replace(/[^a-zA-Z]/g,&quot;&quot;)"> <input type="tel" class="teltxt inputs" onkeyup="this.value=this.value.replace(/\D/g,&quot;&quot;)"> <div class="sendbtn"></div> </div> </div> <div id="end" class="hide"> <div class="box animated05 fadeInScale"> <div class="endclose close"></div> <div class="score">95分</div> <div class="cur"></div> <div class="endrank"></div> <div class="reset"></div> </div> </div> <div id="gamerank" class="hide"> <div class="box animated05 fadeInScale"> <div class="rank-scroll"> <div class="rank-item"> <div class="count">1</div> <div class="nick">安安</div> <div class="rankscore">10000</div> </div> </div> <div class="rankuser"> <div class="rank-item"> <div class="count"></div> <div class="nick"></div> <div class="rankscore"></div> </div> </div> <div class="rankclose close"></div> </div> </div> <div class="music"> <div class="no"></div> <div class="off hide"></div> </div> <div class="pop0 hide"> <img id="topimg" src="./assets/p6_01.jpg" alt=""> <div class="popbox"> <div class="topbox"></div> <div class="poptimer"> <div class="datebox"> <div class="date_item hour">00</div> <div class="date_item minute">00</div> <div class="date_item second">00</div> </div> </div> <div id="poptimer2" class="hide"></div> <div id="menubox"> <div class="menubg"></div> <div class="menu"> <div class="menu_item">颈动脉<div class="menutip"></div> </div> <div class="menu_item">下肢动脉</div> <div class="menu_item">栓塞</div> <div class="menu_item">栓塞</div> </div> </div> <div class="loopImg"> </div> <div class="video-box video-box1 hide"> <div class="videoel-box"> <video id="vowv0" controls="" class="vowv" x5-playsinline="" playsinline="" webkit-playsinline="" src=""></video> </div> <div class="videof">点击回看精彩学术内容</div> </div> <div class="video-box video-box2 hide"> <div class="videoel-box"> <video id="vowv1" controls="" class="vowv" x5-playsinline="" playsinline="" webkit-playsinline="" src=""></video> </div> <div class="videof">点击回看精彩学术内容</div> <img class="video2title" alt=""> <div class="videoel-box"> <video id="vowv2" controls="" class="vowv" x5-playsinline="" playsinline="" webkit-playsinline="" src=""></video> </div> <div class="videof">点击回看精彩学术内容</div> </div> <div class="vowlater hide"> <div class="vowt vowt1"><img src="./assets/p0_t1.png" alt=""></div> <div class="videoel-box"> <video id="vowv3" controls="" class="vowv" x5-playsinline="" playsinline="" webkit-playsinline="" src=""></video> </div> <div class="videof">点击回看精彩学术内容</div> <div class="vowt vowt2"><img src="./assets/p0_t2.png" alt=""></div> <div class="videoel-box"> <video id="vowv4" controls="" class="vowv" x5-playsinline="" playsinline="" webkit-playsinline="" src=""></video> </div> <div class="videof">点击回看精彩学术内容</div> </div> </div> <div id="popback" class="popback0"></div> </div> <div id="eluvia" class="hide"> <div class="eluviaicon"></div> <div class="eluvabox"> <div class="videoel-box"> <video id="vowv5" controls="" class="vowv" x5-playsinline="" playsinline="" webkit-playsinline="" src="video/1634630945443580.mp4"></video> </div> </div> <div id="popback" class="popback1"></div> </div> <div id="poploading" class="hide"> <div class="poploadinground"></div> </div> </div> <script type="text/javascript" src="./assets/bundle.js"></script> <button title="select to enable accessibility for this content" style="width: 1px; height: 1px; position: absolute; top: -1000px; left: -1000px; z-index: 2; background-color: rgb(255, 0, 0);"></button></body></html>
