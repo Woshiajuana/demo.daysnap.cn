@@ -36,9 +36,19 @@ $el.append(app.view)
 const scene = new PIXI.Container()
 app.stage.addChild(scene)
 const bg = PIXI.Sprite.from(assets.bg) // 加载背景
-const r = height / bg.texture.height // 缩放比例
-scene.scale.set(r)
 scene.addChild(bg)
+function onResize() {
+  const { innerWidth, innerHeight } = window
+  const r = innerHeight / bg.texture.height // 缩放比例
+  scene.scale.set(r)
+  if (innerWidth > scene.width) {
+    scene.x = (innerWidth - scene.width) / 2
+  } else {
+    scene.x = (innerWidth - scene.width) / 2 + 80
+  }
+}
+onResize()
+window.addEventListener('resize', onResize)
 
 // 加载图片精灵
 const spritesheet = new PIXI.Spritesheet(
@@ -54,19 +64,35 @@ tv.animationSpeed = 0.1
 tv.play()
 scene.addChild(tv)
 
+const b = new PIXI.AnimatedSprite(spritesheet.animations.b)
+b.x = 1424
+b.y = 728
+b.animationSpeed = 0.02
+b.play()
+scene.addChild(b)
+
+const line = new PIXI.AnimatedSprite(spritesheet.animations.line)
+line.x = 1807
+line.y = 785
+line.animationSpeed = 0.02
+line.play()
+scene.addChild(line)
+
+// 滑动
 const min = (scene.width - width) * -1
 const max = 0
+// eslint-disable-next-line no-new
 new AlloyTouch({
   touch: 'body',
-  vertical: false,
-  min,
+  vertical: false, // 不必需，默认是true代表监听竖直方向touch
+  min, // 不必需,运动属性的最小值
   max,
   sensitivity: 0.2, // 不必需,触摸区域的灵敏度，默认值为1，可以为负数
   factor: 1, // 不必需,表示触摸位移运动位移与被运动属性映射关系，默认值是1
   moveFactor: 1, // 不必需,表示touchmove位移与被运动属性映射关系，默认值是1
   bindSelf: false,
   maxSpeed: 2, // 不必需，触摸反馈的最大速度限制
-  value: 0,
+  value: scene.x,
   change(value) {
     scene.x = clamp(min, value, max)
   },
