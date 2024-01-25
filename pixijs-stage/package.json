@@ -40,7 +40,8 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@daysnap/utils": "^0.0.41",
+    "@daysnap/utils": "^0.0.82",
+    "alloytouch": "^0.3.0",
     "core-js": "^3.29.0",
     "pixi.js": "^7.3.3"
   }

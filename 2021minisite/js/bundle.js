@@ -6943,6 +6943,7 @@
             }
             r ? (this.dispatchEvent(e, "pointerup", t), s && this.dispatchEvent(e, "touchend", t), o && (a && !u || this.dispatchEvent(e, "pointertap", t), s && (this.dispatchEvent(e, "tap", t), o.over = !1))) : o && (this.dispatchEvent(e, "pointerupoutside", t), s && this.dispatchEvent(e, "touchendoutside", t)), o && o.none && delete e.trackedPointers[i]
         }, e.prototype.onPointerMove = function (t) {
+            console.log('11111')
             if (!this.supportsTouchEvents || "touch" !== t.pointerType) {
                 var e = this.normalizeToPointerData(t);
                 "mouse" !== e[0].pointerType && "pen" !== e[0].pointerType || (this._didMove = !0, this.cursor = null);
