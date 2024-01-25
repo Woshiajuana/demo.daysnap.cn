@@ -1,58 +1,40 @@
 import * as PIXI from 'pixi.js'
+import atlasData from './data.json'
 
 import './index.scss'
 
 // 初始化
 const app = new PIXI.Application({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  antialias: true,
-  // backgroundAlpha: false,
-  resolution: window.devicePixelRatio || 1,
+  width: window.innerWidth, //
+  height: window.innerHeight, // 舞台的高度
+  antialias: true, // 是否开启抗锯齿
+  resolution: window.devicePixelRatio || 1, // 渲染器的分辨率/设备像素比。这个值越高，画面越清晰，但是性能越低。
+  resizeTo: window, // 舞台是否应自动调整大小以匹配渲染器视图的大小。
+  autoDensity: true, // 渲染器视图的 CSS 尺寸是否应自动调整大小。
 })
 $('#app').append(app.view)
 
-// 监听
-const onResize = function onResize() {
-  app.renderer.resize(window.innerWidth, window.innerHeight)
-}
-app.view.style = `width: 100vw; height: 100vh;`
-app.renderer.autoResize = true
-onResize()
-window.addEventListener('resize', onResize)
+// 加载图片资源
+const spritesheet = new PIXI.Spritesheet(
+  PIXI.BaseTexture.from(atlasData.meta.image),
+  atlasData,
+)
+// 加载资源
+await spritesheet.parse()
+const anim = new PIXI.AnimatedSprite(spritesheet.animations.tv)
 
-// 创建一个矩形
-const rectangle = new PIXI.Graphics()
-rectangle.beginFill(0x66ccff) // 填充颜色
-rectangle.drawRect(0, 0, 164, 64)
-rectangle.endFill()
+// set the animation speed
+anim.animationSpeed = 0.1
+// play the animation on a loop
+anim.play()
+// add it to the stage to render
+app.stage.addChild(anim)
 
-rectangle.interactive = true
-rectangle.on('click', () => {
-  console.log('rectangle')
-})
-
-// 将矩形添加到舞台
-app.stage.addChild(rectangle)
-
-// 加载图片
-// const texture = await PIXI.Assets.load('assets/img/bg0.jpeg')
-// const bunny = new PIXI.Sprite(texture)
-// app.stage.addChild(bunny)
-
-// 多个图片资源加载 分场景
-PIXI.Assets.addBundle('scree-1', {
-  bg: 'assets/img/bg0.jpeg',
-})
-// 加载
-const assets = await PIXI.Assets.loadBundle('scree-1', (progress) => {
-  console.log('progress', progress)
-})
-
-// 显示文字
-
-// 监听 ticker
-// app.ticker.add(() => {
-//   // each frame we spin the bunny around a bit
-//   // bunny.rotation += 0.01
+// // 加载图片资源
+// PIXI.Assets.addBundle('assets', {
+//   bg: 'assets/img/bg0.jpeg',
+// })
+// // 加载资源
+// const assets = await PIXI.Assets.loadBundle('assets', (progress) => {
+//   console.log('progress', progress)
 // })
