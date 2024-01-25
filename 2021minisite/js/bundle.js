@@ -6896,6 +6896,7 @@
             }
             return i
         }, e.prototype.onPointerDown = function (t) {
+            console.log('111')
             if (!this.supportsTouchEvents || "touch" !== t.pointerType) {
                 var e = this.normalizeToPointerData(t);
                 if (this.autoPreventDefault && e[0].isNormalized) {
@@ -14795,6 +14796,7 @@ object-assign
         for (var t = 0; t < x.length; t++) for (var e = 0; e < x[t].length; e++) {
             var r = x[t][e];
             r.interactive = !0, r.on("pointerdown", function (t) {
+                console.log('pointerdown => ', pointerdown)
                 var e = t.currentTarget.id;
                 0 != e ? t.currentTarget.num == P && (t.currentTarget.id = -1, t.currentTarget.children[1].alpha = 0, createjs.Sound.play("sound_" + e), P++, w = !1) : (0 == e && (t.currentTarget.alpha = 1), c())
             })
