@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js'
 import { clamp } from '@daysnap/utils'
+import gsap from 'gsap'
 import AlloyTouch from 'alloytouch'
 import atlasData from './home.json'
 
@@ -55,6 +56,7 @@ const spritesheet = new PIXI.Spritesheet(
   PIXI.BaseTexture.from(atlasData.meta.image),
   atlasData,
 )
+
 // 加载资源
 await spritesheet.parse()
 const tv = new PIXI.AnimatedSprite(spritesheet.animations.tv)
@@ -71,12 +73,73 @@ b.animationSpeed = 0.02
 b.play()
 scene.addChild(b)
 
+// 线
 const line = new PIXI.AnimatedSprite(spritesheet.animations.line)
 line.x = 1807
 line.y = 785
 line.animationSpeed = 0.02
 line.play()
 scene.addChild(line)
+
+// slogan
+const slogan = PIXI.Sprite.from(spritesheet.textures['slogin.png'])
+slogan.x = 897
+slogan.y = 219
+scene.addChild(slogan)
+
+const roundTip = PIXI.Sprite.from(spritesheet.textures['roundtip.png'])
+roundTip.x = 897
+roundTip.y = 219
+roundTip.anchor.set(0.5)
+
+scene.addChild(roundTip)
+
+gsap.fromTo(
+  roundTip.scale,
+  { x: 0, y: 0, alpha: 0 },
+  {
+    x: 1,
+    y: 1,
+    alpha: 1,
+    duration: 1,
+    repeat: -1,
+    yoyo: true,
+  },
+)
+
+// function o() {
+//   var t = new _.Container()
+//   R.addChild(t)
+//   var e = s('pq.png')
+//   t.addChild(e)
+//   for (var r = 0; r < 8; r++) {
+//     var n = s('dot.png')
+//     ;(n.x = 223 * Math.random() + 20), (n.y = 100)
+//     var i = Math.max(Math.random(), 0.5)
+//     n.scale = { x: i, y: i }
+//     var o = Math.max(1 * Math.random(), 0.2)
+//     t.addChild(n)
+//     new T.TimelineLite({ repeat: -1 })
+//       .fromTo(
+//         n,
+//         o,
+//         { alpha: 0, y: 100 },
+//         {
+//           alpha: 1,
+//           y: 70,
+//           ease: T.Linear.easeOut,
+//         },
+//       )
+//       .to(n, o, { y: 0, ease: T.Linear.easeOut })
+//       .to(n, o, { alpha: 0, y: -100, ease: T.Linear.easeOut })
+//   }
+//   return t
+// }
+
+const ss = PIXI.Sprite.from(spritesheet.textures['pq.png'])
+ss.x = 897
+ss.y = 219
+scene.addChild(ss)
 
 // 滑动
 const min = (scene.width - width) * -1
