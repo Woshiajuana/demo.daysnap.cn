@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { flushSync } from "react-dom";
+import "./App.css";
 
-function App() {
+function App1() {
+  console.log("start App render");
+  const [count, setCount] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button
+      onClick={() => {
+        flushSync(() => {
+          setCount((c) => c + 1);
+        });
+        console.log("count1: ", count);
+        flushSync(() => {
+          setCount((c) => c + 2);
+        });
+        console.log("count2: ", count);
+      }}
+    >
+      {count}
+    </button>
   );
 }
-
+function App(){
+  console.log('start App render111')
+  let syncUpdatedCount
+  const [count, setCount] = useState(0)
+  
+  return (
+    <button onClick={()=>{
+      flushSync(()=>{
+          setCount(c=> {
+            syncUpdatedCount = c + 1
+            return syncUpdatedCount
+          });
+      })
+      console.log('count1: ', count);
+      flushSync(()=>{
+          setCount(c=> {
+            syncUpdatedCount = c + 2
+            return syncUpdatedCount
+          });
+      })
+      console.log('count2: ', count);
+    }}>
+    {count}
+    </button>
+  )
+}
+  
 export default App;
