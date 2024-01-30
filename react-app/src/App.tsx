@@ -1,53 +1,40 @@
-import { useState } from "react";
-import { flushSync } from "react-dom";
-import "./App.css";
+import { useState } from 'react';
 
-function App1() {
-  console.log("start App render");
-  const [count, setCount] = useState(0);
+export default function App() {
+  const [data, setData] = useState({
+    a: 'a',
+    b: 'b',
+    state: {
+      count: 0,
+    }
+  })
+
+  const handleClick = () => {
+    // setData((prevData) => {
+    //   const data = {...prevData}
+    //   data.state.count += 1
+    //   return data
+    // })
+
+    setData((prevData) => {
+      return {
+        ...prevData,
+        state: {
+          ...prevData.state,
+          count: prevData.state.count + 1
+        }
+      }
+    })
+  }
+  
 
   return (
-    <button
-      onClick={() => {
-        flushSync(() => {
-          setCount((c) => c + 1);
-        });
-        console.log("count1: ", count);
-        flushSync(() => {
-          setCount((c) => c + 2);
-        });
-        console.log("count2: ", count);
-      }}
-    >
-      {count}
-    </button>
+    <>
+      <p>a: {data.a}</p>
+      <p>b: {data.b}</p>
+      <p>count: {data.state.count}</p>
+      <br/>
+      <button onClick={handleClick}>+1</button>
+    </>
   );
 }
-function App(){
-  console.log('start App render111')
-  let syncUpdatedCount
-  const [count, setCount] = useState(0)
-  
-  return (
-    <button onClick={()=>{
-      flushSync(()=>{
-          setCount(c=> {
-            syncUpdatedCount = c + 1
-            return syncUpdatedCount
-          });
-      })
-      console.log('count1: ', count);
-      flushSync(()=>{
-          setCount(c=> {
-            syncUpdatedCount = c + 2
-            return syncUpdatedCount
-          });
-      })
-      console.log('count2: ', count);
-    }}>
-    {count}
-    </button>
-  )
-}
-  
-export default App;
