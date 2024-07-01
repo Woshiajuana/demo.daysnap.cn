@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --force --host --port 10010",
+    "dev": "vite --force --host --port 9527",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@daysnap/utils": "^0.1.0",
     "@daysnap/vue-use": "^0.0.12",
+    "amfe-flexible": "^2.2.1",
     "vant": "^4.9.1",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
