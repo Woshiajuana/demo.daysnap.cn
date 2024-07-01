@@ -22,6 +22,7 @@ export default defineConfig({
     }),
 
     Components({
+      dts: 'typings/components.d.ts',
       resolvers: [VantResolver()],
     }),
   ],

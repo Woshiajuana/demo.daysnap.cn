@@ -1,7 +1,7 @@
 html,
 body {
   @extend %pr;
-  @extend %oh;
+  // @extend %oh;
   @extend %pr;
   @extend %w100;
   background-color: #fff;
@@ -10,7 +10,7 @@ body {
 
 #app {
   @extend %h100;
-  @extend %oh;
+  // @extend %oh;
   font-size: j(16);
 }
 
