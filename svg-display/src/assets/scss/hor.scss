@@ -1,0 +1,20 @@
+.hor-header {
+  z-index: 5;
+}
+
+.hor-cell-icon {
+  font-size: j(22) !important;
+}
+.hor-cell-group-title {
+  &.is {
+    font-size: j(12) !important;
+  }
+}
+.hor-view {
+  .hor-skeleton {
+    min-height: 70vh;
+  }
+}
+.hor-scroll-list {
+  @extend %oh;
+}

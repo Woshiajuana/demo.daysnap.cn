@@ -1,0 +1,30 @@
+input:disabled,
+input[disabled] {
+  -webkit-opacity: 1;
+  opacity: 1;
+  -webkit-text-fill-color: var(--van-text-color-3) !important;
+  color: var(--van-text-color-3) !important;
+}
+textarea::-webkit-input-placeholder,
+input::-webkit-input-placeholder {
+  color: var(--van-gray-5);
+}
+textarea::-moz-placeholder,
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: var(--van-gray-5);
+}
+textarea:-moz-placeholder,
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: var(--van-gray-5);
+}
+textarea:-ms-input-placeholder,
+input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--van-gray-5);
+}
+
+.c-placeholder {
+  color: var(--van-gray-5);
+}
