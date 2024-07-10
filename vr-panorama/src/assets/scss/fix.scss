@@ -1,0 +1,9 @@
+.fix-enter-active,
+.fix-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fix-enter-from,
+.fix-leave-to {
+  opacity: 1;
+}

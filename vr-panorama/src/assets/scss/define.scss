@@ -1,0 +1,14 @@
+@import '@daysnap/define-sass';
+
+$color-primary: var(--van-primary-color);
+$color-success: var(--van-success-color);
+$color-danger: var(--van-danger-color);
+$color-warning: var(--van-warning-color);
+$color-review: #7e90b4;
+$nav-bar-height: var(--van-nav-bar-height);
+$tab-card-height: var(--van-tabs-card-height);
+
+%obc {
+  object-fit: cover;
+  object-position: center;
+}

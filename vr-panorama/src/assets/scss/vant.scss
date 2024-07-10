@@ -1,0 +1,26 @@
+.van-dropdown-menu__bar {
+  @extend %bwb;
+  box-shadow: none;
+  z-index: 2;
+}
+.van-index-anchor {
+  background-color: #f2f3f4 !important;
+  left: 0 !important;
+}
+.van-tabs__wrap {
+  @extend %bwb;
+}
+
+// hor-radio yang
+.van-radio__icon--checked .van-icon {
+  background-color: var(--van-radio-checked-icon-color) !important;
+  border-color: var(--van-radio-checked-icon-color) !important;
+}
+
+.van-sticky--fixed,
+.van-popup__close-icon--top-right,
+.van-image-preview__index,
+.van-image-preview__close-icon {
+  margin-top: constant(safe-area-inset-top);
+  margin-top: env(safe-area-inset-top);
+}
