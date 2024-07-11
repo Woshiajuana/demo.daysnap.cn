@@ -33,14 +33,14 @@ export default defineConfig({
   },
   css: {
     devSourcemap: true,
-    postcss: {
-      plugins: [
-        // https://www.npmjs.com/package/postcss-pxtorem
-        postCssPxToRem({
-          rootValue: 37.5, // 1rem的大小
-          propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
-        }),
-      ],
-    },
+    // postcss: {
+    //   plugins: [
+    //     // https://www.npmjs.com/package/postcss-pxtorem
+    //     postCssPxToRem({
+    //       rootValue: 37.5, // 1rem的大小
+    //       propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
+    //     }),
+    //   ],
+    // },
   },
 })
