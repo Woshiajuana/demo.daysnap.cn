@@ -1,5 +1,5 @@
 {
-  "name": "svg-display",
+  "name": "vr",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@daysnap/utils": "^0.1.0",
     "@daysnap/vue-use": "^0.0.12",
+    "@photo-sphere-viewer/core": "^5.8.2",
     "amfe-flexible": "^2.2.1",
     "vant": "^4.9.1",
     "vue": "^3.4.29",
