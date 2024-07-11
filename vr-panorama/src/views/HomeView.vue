@@ -8,12 +8,89 @@
   import { GalleryPlugin } from '@photo-sphere-viewer/gallery-plugin'
   import { MarkersPlugin } from '@photo-sphere-viewer/markers-plugin'
 
-  const images = [
-    new URL('@/assets/images/scene.jpeg', import.meta.url).href,
-    new URL('@/assets/images/screen-3.awebp', import.meta.url).href,
-    new URL('@/assets/images/screen-2.awebp', import.meta.url).href,
-    new URL('@/assets/images/screen-1.awebp', import.meta.url).href,
-  ]
+  let { scenes, current } = {
+    current: 0,
+    scenes: [
+      {
+        id: 1,
+        name: '客厅',
+        panorama: new URL('@/assets/images/scene.jpeg', import.meta.url).href,
+        thumbnail: new URL('@/assets/images/scene.jpeg', import.meta.url).href,
+        markers: [
+          {
+            // image marker that opens the panel when clicked
+            id: 'image',
+            position: { yaw: 0.9458277120328095, pitch: -0.24882520482509585 },
+            image: new URL('@/assets/images/go.png', import.meta.url).href,
+            size: { width: 32, height: 32 },
+            anchor: 'bottom center',
+            zoomLvl: 100,
+            tooltip: '进入',
+            data: { go: true },
+            // content: document.getElementById('lorem-content').innerHTML,
+          },
+          {
+            // image marker that opens the panel when clicked
+            id: 'image1',
+            position: { yaw: 0.006896442388348371, pitch: -0.15192015687366944 },
+            image: new URL('@/assets/images/pin-blue.png', import.meta.url).href,
+            size: { width: 32, height: 32 },
+            anchor: 'bottom center',
+            zoomLvl: 100,
+            tooltip: '打开门',
+            data: { go: true },
+            // content: document.getElementById('lorem-content').innerHTML,
+          },
+          {
+            // image marker rendered in the 3D scene
+            id: 'imageLayer',
+            imageLayer: new URL('@/assets/images/tent.png', import.meta.url).href,
+            size: { width: 120, height: 94 },
+            position: { yaw: 1.400195137059031, pitch: -1.0746167433547926 },
+            tooltip: '这是一个帐篷',
+          },
+          {
+            // html marker with custom style
+            id: 'text',
+            position: { yaw: 5.938545675370713, pitch: -0.21877344626362438 },
+            html: 'HTML <b>marker</b> &hearts;',
+            anchor: 'center center',
+            scale: [0.5, 1.5],
+            style: {
+              maxWidth: '100px',
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Helvetica, sans-serif',
+              textAlign: 'center',
+            },
+            tooltip: {
+              content: 'HTML标记',
+              position: 'top',
+            },
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: '主卧',
+        panorama: new URL('@/assets/images/screen-3.awebp', import.meta.url).href,
+        thumbnail: new URL('@/assets/images/screen-3.awebp', import.meta.url).href,
+        markers: [
+          {
+            // image marker that opens the panel when clicked
+            id: 'image',
+            position: { yaw: 4.7037299358302205, pitch: -0.3834682567015497 },
+            image: new URL('@/assets/images/go.png', import.meta.url).href,
+            size: { width: 32, height: 32 },
+            anchor: 'bottom center',
+            zoomLvl: 100,
+            tooltip: '返回客厅',
+            data: { go: true },
+          },
+        ],
+      },
+    ],
+  }
 
   onMounted(() => {
     const viewer = new Viewer({
@@ -22,7 +99,7 @@
         width: '100%',
         height: '100%',
       },
-      panorama: images[0],
+      panorama: scenes[0].panorama,
       loadingImg: new URL('@/assets/images/loader.gif', import.meta.url).href,
       caption: '测试案例',
       defaultZoomLvl: 0,
@@ -31,20 +108,7 @@
         [
           GalleryPlugin,
           {
-            items: [
-              {
-                id: 'pano-1',
-                name: 'Panorama 1',
-                panorama: images[0],
-                thumbnail: images[0],
-              },
-              {
-                id: 'pano-2',
-                name: 'Panorama 2',
-                panorama: images[1],
-                thumbnail: images[1],
-              },
-            ],
+            items: scenes,
           },
         ],
         [
@@ -58,104 +122,51 @@
         [
           MarkersPlugin,
           {
-            markers: [
-              {
-                // image marker that opens the panel when clicked
-                id: 'image',
-                position: { yaw: 0.32, pitch: 0.11 },
-                image: new URL('@/assets/images/pin-blue.png', import.meta.url).href,
-                size: { width: 32, height: 32 },
-                anchor: 'bottom center',
-                zoomLvl: 100,
-                tooltip: 'A image marker. <b>Click me!</b>',
-                // content: document.getElementById('lorem-content').innerHTML,
-              },
-              {
-                // image marker rendered in the 3D scene
-                id: 'imageLayer',
-                imageLayer: new URL('@/assets/images/tent.png', import.meta.url).href,
-                size: { width: 120, height: 94 },
-                position: { yaw: -0.45, pitch: -0.1 },
-                tooltip: 'Image embedded in the scene',
-              },
-              {
-                // html marker with custom style
-                id: 'text',
-                position: { yaw: 0, pitch: 0 },
-                html: 'HTML <b>marker</b> &hearts;',
-                anchor: 'bottom right',
-                scale: [0.5, 1.5],
-                style: {
-                  maxWidth: '100px',
-                  color: 'white',
-                  fontSize: '20px',
-                  fontFamily: 'Helvetica, sans-serif',
-                  textAlign: 'center',
-                },
-                tooltip: {
-                  content: 'An HTML marker',
-                  position: 'right',
-                },
-              },
-              {
-                // polygon marker
-                id: 'polygon',
-                polygon: [
-                  [6.2208, 0.0906],
-                  [0.0443, 0.1028],
-                  [0.2322, 0.0849],
-                  [0.4531, 0.0387],
-                  [0.5022, -0.0056],
-                  [0.4587, -0.0396],
-                  [0.252, -0.0453],
-                  [0.0434, -0.0575],
-                  [6.1302, -0.0623],
-                  [6.0094, -0.0169],
-                  [6.0471, 0.032],
-                  [6.2208, 0.0906],
-                ],
-                svgStyle: {
-                  fill: 'rgba(200, 0, 0, 0.2)',
-                  stroke: 'rgba(200, 0, 50, 0.8)',
-                  strokeWidth: '2px',
-                },
-                tooltip: {
-                  content: 'A dynamic polygon marker',
-                  position: 'bottom right',
-                },
-              },
-              {
-                // polyline marker
-                id: 'polyline',
-                polylinePixels: [
-                  [2478, 1635],
-                  [2184, 1747],
-                  [1674, 1953],
-                  [1166, 1852],
-                  [709, 1669],
-                  [301, 1519],
-                  [94, 1399],
-                  [34, 1356],
-                ],
-                svgStyle: {
-                  stroke: 'rgba(140, 190, 10, 0.8)',
-                  strokeLinecap: 'round',
-                  strokeLinejoin: 'round',
-                  strokeWidth: '10px',
-                },
-                tooltip: 'A dynamic polyline marker',
-              },
-              {
-                // circle marker
-                id: 'circle',
-                circle: 20,
-                position: { textureX: 2500, textureY: 1200 },
-                tooltip: 'A circle marker',
-              },
-            ],
+            markers: scenes[current].markers,
           },
         ],
       ],
+    })
+
+    const markersPlugin = viewer.getPlugin<MarkersPlugin>(MarkersPlugin)
+
+    viewer.addEventListener('click', ({ data }: any) => {
+      if (!data.rightclick) {
+        console.log('data => ', data)
+        markersPlugin.addMarker({
+          id: '#' + Math.random(),
+          position: { yaw: data.yaw, pitch: data.pitch },
+          image: new URL('@/assets/images/go.png', import.meta.url).href,
+          size: { width: 32, height: 32 },
+          anchor: 'center center',
+          tooltip: '点击进入',
+          data: {
+            go: true,
+          },
+        })
+      }
+    })
+
+    markersPlugin.addEventListener('select-marker', ({ marker, doubleClick, rightClick }) => {
+      if (marker.data?.go) {
+        viewer
+          .animate({
+            zoom: 20,
+            speed: '-10rpm',
+          })
+          .then(() => {
+            markersPlugin.clearMarkers()
+            current++
+            const scene = scenes[current % scenes.length]
+            viewer.setPanorama(scene.panorama).then(() => {
+              viewer.animate({
+                zoom: 0,
+                speed: '-10rpm',
+              })
+              markersPlugin.setMarkers(scene.markers as any)
+            })
+          })
+      }
     })
   })
 </script>
