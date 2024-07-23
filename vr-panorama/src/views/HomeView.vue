@@ -14,8 +14,8 @@
       {
         id: 1,
         name: '客厅',
-        panorama: new URL('@/assets/images/1.jpg', import.meta.url).href,
-        // panorama: new URL('@/assets/images/scene.jpeg', import.meta.url).href,
+        // panorama: new URL('@/assets/images/1.jpg', import.meta.url).href,
+        panorama: new URL('@/assets/images/scene.jpeg', import.meta.url).href,
         thumbnail: new URL('@/assets/images/scene.jpeg', import.meta.url).href,
         markers: [
           {
