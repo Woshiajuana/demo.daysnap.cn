@@ -21,7 +21,7 @@
           {
             // image marker that opens the panel when clicked
             id: 'image',
-            position: { yaw: 0.9458277120328095, pitch: -0.24882520482509585 },
+            position: { yaw: 0.7124024940204513, pitch: -0.19457315787075102 },
             image: new URL('@/assets/images/go.png', import.meta.url).href,
             size: { width: 32, height: 32 },
             anchor: 'bottom center',
@@ -33,28 +33,28 @@
           {
             // image marker that opens the panel when clicked
             id: 'image1',
-            position: { yaw: 0.006896442388348371, pitch: -0.15192015687366944 },
+            position: { yaw: 1.8872548254842234, pitch: -0.20057463152484778 },
             image: new URL('@/assets/images/pin-blue.png', import.meta.url).href,
             size: { width: 32, height: 32 },
             anchor: 'bottom center',
             zoomLvl: 100,
-            tooltip: '打开门',
+            tooltip: '看车内饰',
             data: { go: true },
             // content: document.getElementById('lorem-content').innerHTML,
           },
-          {
-            // image marker rendered in the 3D scene
-            id: 'imageLayer',
-            imageLayer: new URL('@/assets/images/tent.png', import.meta.url).href,
-            size: { width: 120, height: 94 },
-            position: { yaw: 1.400195137059031, pitch: -1.0746167433547926 },
-            tooltip: '这是一个帐篷',
-          },
+          // {
+          //   // image marker rendered in the 3D scene
+          //   id: 'imageLayer',
+          //   imageLayer: new URL('@/assets/images/tent.png', import.meta.url).href,
+          //   size: { width: 120, height: 94 },
+          //   position: { yaw: 1.400195137059031, pitch: -1.0746167433547926 },
+          //   tooltip: '这是一个帐篷',
+          // },
           {
             // html marker with custom style
             id: 'text',
-            position: { yaw: 5.938545675370713, pitch: -0.21877344626362438 },
-            html: 'HTML <b>marker</b> &hearts;',
+            position: { yaw: 0.35555674201933124, pitch: -0.0201715130560709 },
+            html: '<b style="color: red; background-color: rgba(0,0,0,.6)">公告</b>',
             anchor: 'center center',
             scale: [0.5, 1.5],
             style: {
@@ -65,7 +65,7 @@
               textAlign: 'center',
             },
             tooltip: {
-              content: 'HTML标记',
+              content: '汽车街集团总部:上海市普陀区真北路2251号6楼',
               position: 'top',
             },
           },
