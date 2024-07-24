@@ -15,8 +15,8 @@
         id: 1,
         name: '客厅',
         // panorama: new URL('@/assets/images/1.jpg', import.meta.url).href,
-        panorama: new URL('@/assets/images/scene.jpeg', import.meta.url).href,
-        thumbnail: new URL('@/assets/images/scene.jpeg', import.meta.url).href,
+        panorama: new URL('@/assets/images/1.jpeg', import.meta.url).href,
+        thumbnail: new URL('@/assets/images/1.jpeg', import.meta.url).href,
         markers: [
           {
             // image marker that opens the panel when clicked
@@ -74,8 +74,8 @@
       {
         id: 2,
         name: '主卧',
-        panorama: new URL('@/assets/images/screen-3.awebp', import.meta.url).href,
-        thumbnail: new URL('@/assets/images/screen-3.awebp', import.meta.url).href,
+        panorama: new URL('@/assets/images/interior.jpeg', import.meta.url).href,
+        thumbnail: new URL('@/assets/images/interior.jpeg', import.meta.url).href,
         markers: [
           {
             // image marker that opens the panel when clicked
