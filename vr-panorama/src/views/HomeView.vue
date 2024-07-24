@@ -85,7 +85,7 @@
             size: { width: 32, height: 32 },
             anchor: 'bottom center',
             zoomLvl: 100,
-            tooltip: '返回客厅',
+            tooltip: '返回',
             data: { go: true },
           },
         ],
