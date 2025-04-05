@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint . --inspect-config",
+    "lint": "eslint .",
+    "lint:config": "eslint . --inspect-config",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
