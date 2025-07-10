@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>3D</title>
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      * { padding: 0; margin: 0;}
+      body{ display: flex; min-height: 100vh; align-items: center; justify-content: center;}
+      ul{ position: relative; width: 200px; height: 100px; }
+      ul li{ list-style: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+      img{ width: 100%; height: 100%; object-fit: cover; object-position: center;}
+
+      body{
+          --translate-z: 240px;
+         background-color: #000; 
+         perspective: 2000px; 
+         perspective-origin: 50% 0%;
+      }
+      @keyframes rotate {
+        from {
+          transform: rotateY(0);
+        }
+        to {
+          transform: rotateY(360deg);
+        }
+      }
+      ul{ transform-style: preserve-3d; transform: rotateY(0); animation: rotate 10s linear infinite; }
+      ul li { background-color: #f2f2f2; transform-style: preserve-3d; user-select: none; border-radius: 5px;   }
+      ul li img { position: relative;  backface-visibility: hidden; pointer-events: none; border-radius: 10px; overflow: hidden;  }
+      ul li:nth-of-type(1){ transform: rotateY(60deg) translateZ(var(--translate-z));}
+      ul li:nth-of-type(2){ transform: rotateY(120deg) translateZ(var(--translate-z));}
+      ul li:nth-of-type(3){ transform: rotateY(180deg) translateZ(var(--translate-z));}
+      ul li:nth-of-type(4){ transform: rotateY(240deg) translateZ(var(--translate-z));}
+      ul li:nth-of-type(5){ transform: rotateY(300deg) translateZ(var(--translate-z));}
+      ul li:nth-of-type(6){ transform: rotateY(360deg) translateZ(var(--translate-z));}
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><img src="./sell-vehicle-header1.jpg" alt="img"/></li>
+      <li><img src="./sell-vehicle-header1.jpg" alt="img"/></li>
+      <li><img src="./sell-vehicle-header1.jpg" alt="img"/></li>
+      <li><img src="./sell-vehicle-header1.jpg" alt="img"/></li>
+      <li><img src="./sell-vehicle-header1.jpg" alt="img"/></li>
+      <li><img src="./sell-vehicle-header1.jpg" alt="img"/></li>
+    </ul>
+
+    <script>
+      document.addEventListener('mousedown', function(event) {
+        console.log(event)
+      })
+      document.addEventListener('mousemove', function(event)  {
+        // console.log(event)
+      })
+    </script>
+  </body>
+</html>
