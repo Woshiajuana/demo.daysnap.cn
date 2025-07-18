@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>挡牌</title>
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 32px;
+        box-sizing: border-box;
+      }
+      canvas {
+        width: 600px;
+        height: 400px;
+        box-shadow: 0 0 0 1px #ddd;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      button {
+        height: 30px;
+        padding: 0 16px;
+        cursor: pointer;
+      }
+    </style>
+    <script src="./jquery-1.8.1.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <button class="start">绘制</button>
+    </header>
+    <canvas id="canvas" width="600" height="400" />
+    <script>
+      let dots = [];
+      $("body")
+        .on("click", "#canvas", function (event) {
+          const rect = this.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+
+          const { width, height } = this;
+          const ctx = this.getContext("2d");
+          ctx.clearRect(0, 0, width, height);
+
+          if (dots.length >= 4) {
+            dots = [];
+          }
+          dots.push([x, y]);
+
+          dots.map(([x, y]) => {
+            const ctx = canvas.getContext("2d");
+            ctx.beginPath();
+            ctx.arc(x, y, 8, 0, Math.PI * 2);
+            ctx.fillStyle = "#f00";
+            ctx.fill();
+          });
+        })
+        .on("click", ".start", async function () {
+          const image = await getImage("./bb-qcj-1.png");
+          const canvas = document.querySelector("canvas");
+          const ctx = canvas.getContext("2d");
+          // 解构四个点
+          const [p0, p1, p2, p3] = dots.map((p) => ({ x: p[0], y: p[1] }));
+
+          // 绘制第一个三角形 (p0, p1, p2)
+          drawTriangle(
+            ctx,
+            image,
+            { x: 0, y: 0 },
+            { x: image.width, y: 0 },
+            { x: image.width, y: image.height },
+            p0,
+            p1,
+            p2
+          );
+
+          // 绘制第二个三角形 (p0, p2, p3)
+          drawTriangle(
+            ctx,
+            image,
+            { x: 0, y: 0 },
+            { x: image.width, y: image.height },
+            { x: 0, y: image.height },
+            p0,
+            p2,
+            p3
+          );
+        });
+
+      function getImage(src) {
+        return new Promise((resolve, reject) => {
+          const image = document.createElement("img");
+          image.onerror = reject;
+          image.onload = () => resolve(image);
+          image.src = src;
+        });
+      }
+
+      // 绘制三角形部分
+      function drawTriangle(ctx, img, src0, src1, src2, dest0, dest1, dest2) {
+        ctx.save();
+
+        // 创建裁剪路径
+        ctx.beginPath();
+        ctx.moveTo(dest0.x, dest0.y);
+        ctx.lineTo(dest1.x, dest1.y);
+        ctx.lineTo(dest2.x, dest2.y);
+        ctx.closePath();
+        ctx.clip();
+
+        // 计算变换矩阵
+        const matrix = calculateTransform(
+          [src0, src1, src2],
+          [dest0, dest1, dest2]
+        );
+
+        // 应用变换
+        ctx.transform(
+          matrix.a,
+          matrix.b,
+          matrix.c,
+          matrix.d,
+          matrix.e,
+          matrix.f
+        );
+
+        // 绘制图像
+        ctx.drawImage(img, 0, 0);
+
+        ctx.restore();
+      }
+
+      // 计算变换矩阵
+      function calculateTransform(srcPoints, destPoints) {
+        const [s0, s1, s2] = srcPoints;
+        const [d0, d1, d2] = destPoints;
+
+        const x0 = s0.x,
+          y0 = s0.y;
+        const x1 = s1.x,
+          y1 = s1.y;
+        const x2 = s2.x,
+          y2 = s2.y;
+
+        const u0 = d0.x,
+          v0 = d0.y;
+        const u1 = d1.x,
+          v1 = d1.y;
+        const u2 = d2.x,
+          v2 = d2.y;
+
+        const det = x0 * (y1 - y2) + x1 * (y2 - y0) + x2 * (y0 - y1);
+
+        // 计算变换矩阵参数
+        const a = (u0 * (y1 - y2) + u1 * (y2 - y0) + u2 * (y0 - y1)) / det;
+        const c = (u0 * (x2 - x1) + u1 * (x0 - x2) + u2 * (x1 - x0)) / det;
+        const e =
+          (u0 * (x1 * y2 - x2 * y1) +
+            u1 * (x2 * y0 - x0 * y2) +
+            u2 * (x0 * y1 - x1 * y0)) /
+          det;
+
+        const b = (v0 * (y1 - y2) + v1 * (y2 - y0) + v2 * (y0 - y1)) / det;
+        const d = (v0 * (x2 - x1) + v1 * (x0 - x2) + v2 * (x1 - x0)) / det;
+        const f =
+          (v0 * (x1 * y2 - x2 * y1) +
+            v1 * (x2 * y0 - x0 * y2) +
+            v2 * (x0 * y1 - x1 * y0)) /
+          det;
+
+        return { a, b, c, d, e, f };
+      }
+    </script>
+  </body>
+</html>
