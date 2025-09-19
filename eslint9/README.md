@@ -1,4 +1,6 @@
 
+npx eslint-config-prettier some/file.js，看看它是否指出了任何冲突的规则。运行 ESLint 时使用--print-config可以打印出文件的完整列表。
+
 ```
 import { defineConfig } from "eslint/config";
 import globals from "globals";
